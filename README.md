@@ -5,6 +5,7 @@
 1. [What is React?](#what-is-react)
 2. [Major Features of React](#major-features-of-react)
 3. [What is JSX?](#what-is-jsx)
+4. [Is it possible to use react without JSX?](#is-it-possible-to-use-react-without-jsx)
 
 ---
 
@@ -79,3 +80,40 @@ Self-Closing Tags: Just like in HTML, you can use self-closing tags in JSX for c
 Comments: JSX supports including comments using curly braces and a pair of parentheses, like {/* This is a comment */}.
 
 Utilizing JSX enhances code readability, simplifies the creation of UI components, and facilitates the understanding of the overall structure of a React application.
+
+
+## Is it possible to use react without JSX?
+
+Yes, it is possible to use React without JSX. While JSX has become the standard and recommended way to define UI components in React applications, React can be used without JSX by directly using React's createElement function. This approach involves creating React elements in a more programmatic manner.
+
+Here's an example of creating a simple React element without JSX:
+
+const element = React.createElement('div', null, 'Hello, World!');
+
+
+Certainly, here's the answer in Markdown format with a table of contents:
+
+Interview Questions about React.js
+Table of Contents
+Is it Possible to Use React Without JSX?
+Is it Possible to Use React Without JSX?
+Yes, it is possible to use React without JSX. While JSX has become the standard and recommended way to define UI components in React applications, React can be used without JSX by directly using React's createElement function. This approach involves creating React elements in a more programmatic manner.
+
+Here's an example of creating a simple React element without JSX:
+
+javascript
+Copy code
+import React from 'react';
+
+const element = React.createElement('div', null, 'Hello, World!');
+
+In this example, React.createElement takes three arguments:
+The type of element to create ('div' in this case).
+An object for element attributes (can be set to null if there are none).
+The content of the element ('Hello, World!' in this case).
+While this approach is less common in modern React development, it can be useful in certain scenarios or environments where JSX might not be feasible or preferred.
+
+The use of JSX offers several advantages, such as improved code readability, a more intuitive syntax, and better integration with modern JavaScript tooling. JSX also makes it easier to visualize the structure of components and compose UI elements.
+
+In practice, JSX is the standard way of defining React components, but the ability to use React without JSX provides flexibility for specific use cases or preferences.
+
