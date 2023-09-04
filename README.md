@@ -9,6 +9,7 @@
 5. [Difference Between Element and Component?](#difference-between-element-and-component)
 6. [How to create components in React?](#how-to-create-components-in-React?)
 7. [When to use a Class Component over a Function Component?](#when-to-use-a-class-component-over-a-function-component?)
+8. [What are Pure Components?](#What-are-pure-components?)
 
 ---
 
