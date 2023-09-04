@@ -11,6 +11,19 @@
 7. [When to use a Class Component over a Function Component?](#when-to-use-a-class-component-over-a-function-component)
 8. [What are Pure Components?](#what-are-pure-components)
 9. [If Pure Component is better from the optimization point of view why dont we use it by default?](#if-pure-component-is-better-from-the-optimization-point-of-view-why-dont-we-use-it-by-default)
+10. [What is state in React?](#what-is-state-in-react)
+11. [What are props in React?](#what-are-props-in-react)
+12 [What is the difference between state and props?](#what-is-the-difference-between-state-and-props)
+13. [Why should we not update the state directly?](#why-should-we-not-update-the-state-directly)
+14. [Is the state updated synchronously?](#is-the-state-updated-synchronously)
+15. [What is the purpose of callback function as an argument of setState()?](#is-the-state-updated-synchronously)
+16. [How to bind methods or event handlers in JSX callbacks?](#how-to-bind-methods-or-event-handlers-in-JSX-callbacks)
+17. [How to pass a parameter to an event handler or callback](#how-to-pass-a-parameter-to-an-event-handler-or-callback)
+18. [What are synthetic events in React?](#what-are-synthetic-events-in-react)
+19. [What are inline conditional expressions?](#what-are-inline-conditional-expressions)
+20. [What is KEY prop and what is the benefit of using it in arrays of elements?](#what-is-key-prop-and-what-is-the-benefit-of-using-it-in-arrays-of-elements)
+21. [What is the use of refs?](#what-is-the-use-of-refs)
+
 
 ---
 
@@ -231,3 +244,452 @@ Pure Components provide optimization benefits by automatically handling shouldCo
 5. **Complexity**: Pure Components add complexity to the React API, and the React team has chosen to prioritize simplicity and predictability for most use cases. Functional components with hooks provide a simpler and more flexible alternative.
 
 In summary, while Pure Components offer performance benefits, they are not a one-size-fits-all solution. React provides flexibility to choose the appropriate optimization strategy based on the specific requirements of your application. Functional components with hooks have become the preferred choice for simplicity and performance in many cases, while Pure Components remain a useful tool for certain optimization scenarios.
+
+## What is state in React?
+
+**State in React** refers to an internal data storage mechanism that allows components to keep track of information that can be used to influence their rendering and behavior. As a developer with experience, I'll explain state in React:
+
+1. **Dynamic Data**: State represents data that can change over time as a result of user interactions, network requests, or other factors. This dynamic data can include things like user input, fetched data from APIs, or component-specific settings.
+
+2. **Component-Specific**: Each component in a React application can have its own state, which is isolated from other components. This allows components to manage their data independently.
+
+3. **Mutable but Controlled**: While state data is mutable (you can change it), React enforces a controlled way to modify it. You typically use the `setState` method provided by React to update the state, which then triggers a re-render of the component.
+
+4. **Local to Component**: State is local to a component, meaning that it's scoped to that component. Other components cannot directly access or modify another component's state. If data needs to be shared between components, it can be passed as props.
+
+5. **Initialization**: State is typically initialized in the constructor of a class component or using the `useState` hook in a functional component.
+
+Example (Class Component):
+```javascript
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <p>Count: {this.state.count}</p>
+        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+          Increment
+        </button>
+      </div>
+    );
+  }
+}
+```
+
+Example (Functional Component with `useState` hook):
+```javascript
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+State is a crucial concept in React, as it allows components to manage and respond to changes in data, leading to dynamic and interactive user interfaces.
+
+## What are props in React?
+
+**Props in React** (short for "properties") are a mechanism for passing data from a parent component to its child components. They allow you to customize and configure child components, making them dynamic and reusable. As an experienced developer, I'll explain the key points about props in React:
+
+1. **Immutable Data**: Props are read-only and cannot be modified by the child component that receives them. They are passed from the parent component and remain constant throughout the child component's lifecycle.
+
+2. **Customization**: Props enable you to customize the behavior and appearance of child components. You can pass data, functions, or even other components as props.
+
+3. **Dynamic Rendering**: Props make it possible to render components dynamically based on different data or conditions. By changing the props passed to a component, you can influence how it renders.
+
+4. **Component Composition**: Props are a fundamental part of component composition. They allow you to create complex UIs by combining and nesting components, each with its own set of props.
+
+5. **Default Values**: You can provide default values for props, ensuring that the component functions properly even if specific props are not passed.
+
+6. **Type Checking**: It's a good practice to define the expected types of props using PropTypes or TypeScript. This helps catch errors during development.
+
+Example of using props in React:
+
+```jsx
+function Greeting(props) {
+  return <p>Hello, {props.name}!</p>;
+}
+
+// Usage: Passing the "name" prop
+<Greeting name="Alice" />
+```
+
+In this example, the `Greeting` component receives a `name` prop from its parent component and renders a personalized greeting.
+
+Props are a fundamental concept in React, promoting reusability, modularity, and the creation of dynamic and interactive user interfaces.
+
+## What is the difference between state and props?
+
+**State** and **props** are both ways to pass data and manage information in React components, but they serve different purposes and have key differences:
+
+### State:
+
+1. **Managed Internally**: State is internal to a component. It is used to manage and store data that can be changed and modified by the component itself.
+
+2. **Mutable**: State data can be modified within the component using the `setState` method, triggering re-renders when it changes.
+
+3. **Local to Component**: State is local and isolated to the component where it is defined. It cannot be directly accessed or modified by other components.
+
+4. **Initialization**: State is typically initialized in the constructor (for class components) or using the `useState` hook (for functional components).
+
+5. **Usage**: State is used when a component needs to keep track of data that may change over time, such as form input values, user interactions, or data fetched from an API.
+
+### Props:
+
+1. **Received from Parent**: Props are passed from a parent component to a child component. They are a way to customize and configure child components.
+
+2. **Immutable**: Props are read-only within the child component that receives them. They cannot be modified by the child component.
+
+3. **Parent-Child Communication**: Props enable communication between parent and child components. The parent can pass data and functions to the child to influence its behavior.
+
+4. **Usage**: Props are used when you want to make a component configurable and reusable. They allow you to pass data and behavior down the component hierarchy.
+
+In summary, state is used for managing internal, mutable data within a component, while props are used for passing data and behavior from parent to child components, making components configurable and reusable. Understanding when to use state and when to use props is crucial for effective React component design.
+
+## Why should we not update the state directly?
+
+In React, it's strongly discouraged to update the state directly by assigning a new value to the state variable. Instead, you should use the `setState` method provided by React. There are several important reasons for not updating the state directly:
+
+1. **Reconciliation**: React uses a process called "reconciliation" to efficiently update the DOM when the state changes. By using `setState`, React can track the changes you make and optimize the rendering process. If you update the state directly, React won't be aware of the change, leading to unpredictable and inefficient rendering.
+
+2. **Asynchronous State Updates**: State updates in React are batched and asynchronous. When you call `setState`, React may group multiple updates together for performance reasons. If you update the state directly, you might miss these optimizations, potentially leading to bugs.
+
+3. **Functional Updates**: The `setState` method can also accept a function as an argument. This function receives the previous state and props, allowing you to perform updates based on the previous state. Directly modifying the state variable doesn't provide this capability.
+
+4. **State Validation**: React can implement additional checks and validations when you use `setState`, ensuring that the state remains consistent and correctly updated. Direct modifications can bypass these checks and lead to errors.
+
+5. **Debugging**: When you update the state directly, it can be challenging to track when and where changes occur, making debugging more difficult. Using `setState` provides a clear point of control and traceability.
+
+Here's an example of using `setState` correctly:
+
+```jsx
+// Incorrect: Updating state directly
+this.state.count = this.state.count + 1;
+
+// Correct: Using setState
+this.setState({ count: this.state.count + 1 });
+```
+
+In summary, updating the state directly in React is discouraged because it can lead to unpredictable behavior, reduced performance, and difficulties in debugging. Using the `setState` method ensures that state updates are handled correctly and efficiently by the React framework.
+
+## Is the state updated synchronously?
+
+In React, state updates using the `setState` method are typically asynchronous, but they can also be batched for performance reasons. Here's a more detailed explanation:
+
+1. **Asynchronous Updates**: When you call `setState`, React schedules the state update to be processed later, not immediately when the function is called. This asynchronous behavior is to ensure that multiple state updates can be batched together for optimization. React does this to avoid unnecessary re-renders and improve performance.
+
+2. **Batching**: React may batch multiple `setState` calls together into a single update for efficiency. For example, if you have multiple `setState` calls within the same function or event handler, React may batch them into a single update to prevent unnecessary re-renders.
+
+3. **Event Handlers**: State updates triggered by user events (like button clicks or input changes) are often batched to optimize performance. React groups these updates together to minimize re-renders.
+
+While state updates are generally asynchronous and batched, React ensures that the component re-renders and reflects the most recent state before any user interface updates. This means that even though the updates are processed asynchronously, React takes care of rendering the component with the updated state before moving on to other tasks.
+
+Here's an example to illustrate this behavior:
+
+```jsx
+this.setState({ count: this.state.count + 1 });
+
+console.log(this.state.count); // This may not immediately reflect the updated state value.
+```
+
+In this example, `console.log` may not immediately show the updated `count` value because the state update is asynchronous. However, React will ensure that the component eventually re-renders with the correct state value.
+
+If you need to perform actions after the state has been updated, React provides a way to pass a callback function to `setState` that will be executed once the state update is complete:
+
+```jsx
+this.setState({ count: this.state.count + 1 }, () => {
+  console.log(this.state.count); // This will reflect the updated state value.
+});
+```
+
+Using the callback ensures that you work with the updated state value.
+
+## How to bind methods or event handlers in JSX callbacks?
+
+In React, you have several options for binding methods or event handlers in JSX callbacks. The choice of which method to use depends on your component's context and whether you're using functional or class components. Here are the common methods:
+
+**1. Using Arrow Functions (Preferred in Functional Components):**
+
+In functional components, you can use arrow functions for event handlers. Arrow functions automatically capture the `this` context of the component, so you don't need to manually bind them.
+
+```jsx
+function MyComponent() {
+  const handleClick = () => {
+    // Your code here
+  };
+
+  return <button onClick={handleClick}>Click me</button>;
+}
+```
+
+**2. Binding in the Constructor (Class Components):**
+
+In class components, you can manually bind event handlers in the component's constructor. This ensures that the handler functions maintain the correct `this` context.
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    // Your code here
+  }
+
+  render() {
+    return <button onClick={this.handleClick}>Click me</button>;
+  }
+}
+```
+
+**3. Using Arrow Function Class Properties (Class Components - Experimental):**
+
+If you're using class components and your environment supports class properties, you can define event handlers as arrow functions directly in the class body. This approach also avoids the need for manual binding.
+
+```jsx
+class MyComponent extends React.Component {
+  handleClick = () => {
+    // Your code here
+  };
+
+  render() {
+    return <button onClick={this.handleClick}>Click me</button>;
+  }
+}
+```
+
+**4. Binding in Render (Not Recommended):**
+
+You can bind event handlers directly in the JSX render method. However, this is not recommended for performance reasons, as it creates a new function on each render.
+
+```jsx
+class MyComponent extends React.Component {
+  handleClick() {
+    // Your code here
+  }
+
+  render() {
+    return <button onClick={this.handleClick.bind(this)}>Click me</button>;
+  }
+}
+```
+
+Using arrow functions in functional components or binding in the constructor of class components are the most common and recommended ways to handle event handlers in React, as they ensure proper handling of the `this` context and maintain good performance.
+
+## How to pass a parameter to an event handler or callback?
+
+In React, you have several options for binding methods or event handlers in JSX callbacks. The choice of which method to use depends on your component's context and whether you're using functional or class components. Here are the common methods:
+
+**1. Using Arrow Functions (Preferred in Functional Components):**
+
+In functional components, you can use arrow functions for event handlers. Arrow functions automatically capture the `this` context of the component, so you don't need to manually bind them.
+
+```jsx
+function MyComponent() {
+  const handleClick = () => {
+    // Your code here
+  };
+
+  return <button onClick={handleClick}>Click me</button>;
+}
+```
+
+**2. Binding in the Constructor (Class Components):**
+
+In class components, you can manually bind event handlers in the component's constructor. This ensures that the handler functions maintain the correct `this` context.
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    // Your code here
+  }
+
+  render() {
+    return <button onClick={this.handleClick}>Click me</button>;
+  }
+}
+```
+
+**3. Using Arrow Function Class Properties (Class Components - Experimental):**
+
+If you're using class components and your environment supports class properties, you can define event handlers as arrow functions directly in the class body. This approach also avoids the need for manual binding.
+
+```jsx
+class MyComponent extends React.Component {
+  handleClick = () => {
+    // Your code here
+  };
+
+  render() {
+    return <button onClick={this.handleClick}>Click me</button>;
+  }
+}
+```
+
+**4. Binding in Render (Not Recommended):**
+
+You can bind event handlers directly in the JSX render method. However, this is not recommended for performance reasons, as it creates a new function on each render.
+
+```jsx
+class MyComponent extends React.Component {
+  handleClick() {
+    // Your code here
+  }
+
+  render() {
+    return <button onClick={this.handleClick.bind(this)}>Click me</button>;
+  }
+}
+```
+
+Using arrow functions in functional components or binding in the constructor of class components are the most common and recommended ways to handle event handlers in React, as they ensure proper handling of the `this` context and maintain good performance.
+
+## What are synthetic events in React?
+
+In React, **synthetic events** are a cross-browser wrapper around the browser's native events. They are provided by React to ensure consistent behavior and handling of events across different browsers and platforms.
+
+Here are key points to understand about synthetic events in React:
+
+1. **Cross-Browser Compatibility**: React abstracts away the differences and inconsistencies in browser event handling by providing a unified API for handling events. This means you don't need to worry about browser-specific quirks.
+
+2. **Immutability**: Synthetic events are read-only and immutable. You cannot modify their properties directly. This immutability ensures that React can manage event pooling and reuse, improving performance.
+
+3. **Asynchronous**: Synthetic events are often processed asynchronously by React for performance reasons. This means that event handlers won't necessarily execute immediately after an event occurs.
+
+4. **Event Pooling**: React uses event pooling to recycle event objects. After an event handler is called, the event object is nullified and returned to the pool for reuse in future events. This recycling helps reduce memory usage and improve performance.
+
+5. **Event Delegation**: React attaches event handlers at the root of the document (or at a higher-level ancestor) and relies on a mechanism called event delegation. This approach is efficient, especially in applications with many elements.
+
+Here's an example of using a synthetic event in React:
+
+```jsx
+class MyComponent extends React.Component {
+  handleClick = (event) => {
+    // Accessing event properties
+    console.log(event.target.value);
+  };
+
+  render() {
+    return <button onClick={this.handleClick}>Click me</button>;
+  }
+}
+```
+
+In this example, the `onClick` handler receives a synthetic event as an argument. You can access properties like `target`, which represents the DOM element where the event occurred, and use them in your event handling logic.
+
+By providing synthetic events, React simplifies event handling, improves cross-browser compatibility, and helps maintain a performant event system.
+
+## What are inline conditional expressions?
+
+**Inline conditional expressions**, often referred to as the ternary operator (`? :`), are a concise way to write conditional statements in a single line of code. They are frequently used in JavaScript and other programming languages to make code more readable and succinct when you need to execute different code depending on a condition.
+
+In JavaScript, the syntax of an inline conditional expression is as follows:
+
+```javascript
+condition ? expressionIfTrue : expressionIfFalse
+```
+
+Here's a breakdown of how it works:
+
+- `condition` is the expression that evaluates to either `true` or `false`.
+- If `condition` is `true`, `expressionIfTrue` is executed.
+- If `condition` is `false`, `expressionIfFalse` is executed.
+
+Example:
+
+```javascript
+const age = 25;
+const message = age >= 18 ? 'You are an adult' : 'You are not an adult';
+console.log(message); // Output: 'You are an adult'
+```
+
+In this example, the ternary operator checks if `age` is greater than or equal to 18. If it's true, it assigns 'You are an adult' to `message`; otherwise, it assigns 'You are not an adult'.
+
+Inline conditional expressions are particularly handy for assigning values or rendering content based on conditions in a concise and readable way. However, it's important not to overuse them to maintain code readability and avoid complex nested expressions.
+
+## What is KEY prop and what is the benefit of using it in arrays of elements?
+
+The "key" prop in React is a special attribute that you can include when rendering arrays of elements. It's used to help React identify and keep track of individual elements within an array. Using "key" props correctly offers several benefits:
+
+1. **Efficient Reconciliation**: React uses keys to efficiently update and reconcile the rendered elements in an array when the array changes. It allows React to determine which elements are added, removed, or modified without re-rendering the entire array. This is crucial for performance optimization, especially in lists or dynamic content.
+
+2. **Stable Identity**: Keys provide a stable identity to elements, ensuring that React can associate a specific element in the new array with its corresponding element in the previous array. This prevents unnecessary re-renders and maintains component state correctly.
+
+3. **Preserve Component State**: When elements are re-ordered or removed from an array, React can preserve the state of components associated with those elements, minimizing the risk of losing user input or other valuable data.
+
+4. **Avoiding Duplicate Keys**: React encourages the use of unique keys within an array of elements. Using non-unique keys can lead to unexpected behavior and errors. React will issue a warning if it encounters duplicate keys.
+
+Here's an example of using the "key" prop in a list of React elements:
+
+```jsx
+function TodoList({ todos }) {
+  return (
+    <ul>
+      {todos.map((todo) => (
+        <li key={todo.id}>{todo.text}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+In this example, each `li` element is assigned a unique key based on the `id` of the corresponding `todo` object. This ensures that React can efficiently update the list when the `todos` array changes.
+
+While the "key" prop is a powerful tool for optimizing the performance of rendering arrays of elements, it's essential to use it correctly by providing unique and stable keys to each element. Misusing or omitting keys can lead to unexpected behavior and performance issues.
+
+## What is the use of refs?
+
+**Refs** in React provide a way to access and interact with the DOM (Document Object Model) elements directly. They are a mechanism for "referring" to a DOM element in a React component. While React encourages a declarative approach to building user interfaces, there are scenarios where direct interaction with the DOM is necessary, and that's where refs come in.
+
+Here are some common use cases for refs in React:
+
+1. **Accessing DOM Elements**: You can use refs to get a reference to a DOM element and interact with it directly. For example, you might want to focus an input field, scroll to a particular element, or measure the size of an element.
+
+2. **Managing Focus**: Refs are often used to manage focus within a component. You can use the `ref` of an input element to programmatically focus it when needed, such as after an error message is displayed.
+
+3. **Integration with Third-Party Libraries**: When integrating React with third-party libraries or non-React code, refs can be used to interact with and control these libraries directly. For instance, when working with D3.js for data visualization, you might need to access specific SVG elements using refs.
+
+4. **Custom Input Components**: When building custom input components (e.g., a date picker or a rich text editor), refs allow you to access and control the inner workings of these components.
+
+Here's an example of using a ref to focus an input element:
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.myInputRef = React.createRef();
+  }
+
+  componentDidMount() {
+    // Focus the input element when the component mounts
+    this.myInputRef.current.focus();
+  }
+
+  render() {
+    return <input ref={this.myInputRef} />;
+  }
+}
+```
+
+In this example, we create a ref using `React.createRef()` and assign it to the `ref` attribute of the `input` element. In the `componentDidMount` lifecycle method, we use the ref to focus the input element when the component is mounted.
+
+It's important to note that using refs to directly manipulate the DOM should be done sparingly and should be a last resort. React's declarative approach is usually sufficient for most use cases, and direct DOM manipulation can lead to unexpected behavior if not used carefully. Refs are a tool for those specific situations where direct DOM interaction is necessary.
