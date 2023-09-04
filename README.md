@@ -7,9 +7,10 @@
 3. [What is JSX?](#what-is-jsx)
 4. [Is it possible to use react without JSX?](#is-it-possible-to-use-react-without-jsx)
 5. [Difference Between Element and Component?](#difference-between-element-and-component)
-6. [How to create components in React?](#how-to-create-components-in-React?)
-7. [When to use a Class Component over a Function Component?](#when-to-use-a-class-component-over-a-function-component?)
-8. [What are Pure Components?](#What-are-pure-components?)
+6. [How to create components in React?](#how-to-create-components-in-react)
+7. [When to use a Class Component over a Function Component?](#when-to-use-a-class-component-over-a-function-component)
+8. [What are Pure Components?](#what-are-pure-components)
+9. [If Pure Component is better from the optimization point of view why dont we use it by default?](#if-pure-component-is-better-from-the-optimization-point-of-view-why-dont-we-use-it-by-default)
 
 ---
 
@@ -214,3 +215,19 @@ class MyPureComponent extends PureComponent {
 In this example, MyPureComponent extends PureComponent, which automatically handles shouldComponentUpdate with shallow prop comparisons.
 
 To summarize, Pure Components are a valuable tool for optimizing React application performance by reducing unnecessary renders. However, they should be used judiciously, considering the nature of your data and how it is updated in your application.
+
+## If Pure Component is better from the optimization point of view, why don't we use it by default?(#)
+
+Pure Components provide optimization benefits by automatically handling shouldComponentUpdate with shallow prop and state comparisons. However, they are not the default because of several considerations:
+
+1. **Shallow Comparisons Only**: Pure Components rely on shallow comparisons of props and state. This means they consider the references of objects, not their content. If you have deeply nested data structures or need to perform deep equality checks, using Pure Components may not work as expected. Custom shouldComponentUpdate logic would be necessary.
+
+2. **Not Suitable for All Use Cases**: While Pure Components are effective for many scenarios, they might not be appropriate for every situation. Some components may have side effects, asynchronous updates, or complex rendering logic that can't be determined solely by prop and state changes. In these cases, manually implementing `shouldComponentUpdate` or using functional components with React hooks may be more suitable.
+
+3. **Potential False Positives**: Pure Components can sometimes result in false positives, where they prevent necessary re-renders. This can lead to subtle bugs if not handled correctly.
+
+4. **Backward Compatibility**: React aims to maintain backward compatibility and minimize breaking changes. Making Pure Components the default behavior would have been a significant breaking change for existing applications that rely on class components.
+
+5. **Complexity**: Pure Components add complexity to the React API, and the React team has chosen to prioritize simplicity and predictability for most use cases. Functional components with hooks provide a simpler and more flexible alternative.
+
+In summary, while Pure Components offer performance benefits, they are not a one-size-fits-all solution. React provides flexibility to choose the appropriate optimization strategy based on the specific requirements of your application. Functional components with hooks have become the preferred choice for simplicity and performance in many cases, while Pure Components remain a useful tool for certain optimization scenarios.
