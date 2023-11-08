@@ -24,7 +24,7 @@
 20. [What is KEY prop and what is the benefit of using it in arrays of elements?](#what-is-key-prop-and-what-is-the-benefit-of-using-it-in-arrays-of-elements)
 21. [What is the use of refs?](#what-is-the-use-of-refs)
 22. [How to create refs??](#how-to-create-refs)
-
+24. [memo VS useMemo?](#memo-vs-usememo)
 
 
 ---
@@ -735,7 +735,7 @@ Forward refs in React provide a way to pass a ref from a parent component down t
 
 ### Example
 
-#### Parent Component
+#### Parent Component 
 
 ```jsx
 import React, { createRef } from 'react';
@@ -756,8 +756,27 @@ class ParentComponent extends React.Component {
     return <ChildComponent ref={this.childRef} />;
   }
 }
+```
 
+## memo VS useMemo?
 
+### `React.memo`
+
+- **Purpose**: `React.memo` is used to optimize functional components by preventing unnecessary re-renders.
+
+- **Use Case**: It is ideal for optimizing the rendering of functional components, ensuring they don't re-render when their props remain the same.
+
+- **How It Works**: `React.memo` memoizes the rendered output of a component based on its props.
+
+### `useMemo`
+
+- **Purpose**: `useMemo` is used to memoize the result of a computation or function for performance optimization.
+
+- **Use Case**: It is great for optimizing specific calculations or expensive function calls within functional components.
+
+- **How It Works**: `useMemo` caches the result of a function or expression and recalculates it only when specified dependencies change.
+
+In practice, you might use `React.memo` to prevent unnecessary re-renders of entire components, while `useMemo` is handy for memoizing values or calculations within a component. The choice depends on your optimization goals and the specific scenarios you encounter in your React applications.
 
 
 
