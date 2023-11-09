@@ -25,8 +25,8 @@
 21. [What is the use of refs?](#what-is-the-use-of-refs)
 22. [How to create refs??](#how-to-create-refs)
 24. [memo VS useMemo?](#memo-vs-usememo)
-25. [How do you memoize a component?](how-do-you-memoize-a-component)
-26. [What is virtual DOM?](what-is-virtual-dom)
+25. [How do you memoize a component?](#how-do-you-memoize-a-component)
+26. [What is virtual DOM?](#what-is-virtual-dom)
 
 ---
 
