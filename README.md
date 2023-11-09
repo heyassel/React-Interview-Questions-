@@ -26,7 +26,7 @@
 22. [How to create refs??](#how-to-create-refs)
 24. [memo VS useMemo?](#memo-vs-usememo)
 25. [How do you memoize a component?](how-do-you-memoize-a-component)
-
+26. [What is virtual DOM?](what-is-virtual-dom)
 
 ---
 
@@ -808,5 +808,12 @@ Wrap your functional component with React.memo to memoize it. This means the com
 ### Step 4: Export the Memoized Component
 Make sure to export the memoized component for use in your application.
 
+## What is Virtual DOM?
+
+Sure! Think of the Virtual DOM as React's strategy to speed up webpage updates. In the traditional way, when something changes on a page, the browser goes straight to updating it. React, being clever, introduces the Virtual DOM. It's like a behind-the-scenes copy of the webpage stored in the computer's memory.
+
+So, when you want to change something in your React app, React first makes the change in this Virtual DOM, not on the actual page. Then, it compares the Virtual DOM with the real one and figures out the most efficient way to update the actual page. It's like a smart assistant highlighting only the changed parts instead of rewriting the entire page.
+
+This whole process makes updates faster and helps React create snappy and responsive web applications. So, in a nutshell, the Virtual DOM is React's secret sauce for optimizing how it updates web pages.
 
 
