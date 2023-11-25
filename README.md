@@ -27,7 +27,7 @@
 24. [memo VS useMemo?](#memo-vs-usememo)
 25. [How do you memoize a component?](#how-do-you-memoize-a-component)
 26. [What is virtual DOM?](#what-is-virtual-dom)
-27. 
+27. [What is React Fiber?](#what-is-react-fiber)
 ---
 
 ## What is React?
@@ -883,4 +883,8 @@ Can you explain the difference between Shadow DOM and Virtual DOM?
 * **The capabilities of each technology**:
     * **Virtual DOM**:  Virtual DOM is primarily a performance optimization technique. It minimizes the direct manipulation of the real DOM, making updates faster and more efficient.
     * **Shadow DOM**: Encapsulation: It provides encapsulation by creating a scoped DOM tree. The styles and structure inside a shadow DOM are scoped to that specific component, avoiding global conflicts.
+
+### What is React Fiber?
+
+
 
