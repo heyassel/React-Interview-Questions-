@@ -917,5 +917,45 @@ This triggers a re-render with the updated value.
 
 Controlled components provide a clear and controlled way to manage form elements, facilitating operations like validation or modification of user input before it gets updated in the state. It's a crucial concept for building interactive and responsive forms in React.
 
+### Can you explain the concept of uncontrolled components in React?
 
+Certainly. Uncontrolled components are essentially the opposite of controlled components. In an uncontrolled component, the form element keeps its own internal state rather than being controlled by React state.
+
+Key Characteristics:
+
+Internal State:
+
+The form element, like an input field, maintains its state internally.
+React does not manage or control the value of the form element.
+No onChange Handler:
+
+Unlike controlled components, there's no need for an onChange event handler to capture user input.
+The form element operates independently, and its value is managed by the browser.
+Direct DOM Manipulation:
+
+Accessing and manipulating the value involves direct DOM manipulation rather than going through React state and updates.
+```jsx
+function UncontrolledComponentExample() {
+  let inputRef = React.createRef();
+
+  const handleClick = () => {
+    // Access the value directly using the reference
+    alert(`Input Value: ${inputRef.current.value}`);
+  };
+
+  return (
+    <div>
+      <input type="text" ref={inputRef} />
+      <button onClick={handleClick}>Get Value</button>
+    </div>
+  );
+}
+```
+
+In this example, we use the ref attribute to create a reference to the input field, and when we want to access its value, we do so directly using the reference.
+
+Use Cases:
+
+Uncontrolled components are handy when you want a more straightforward interaction with the DOM, or when integrating React with non-React code.
+Uncontrolled components are a bit more hands-off; they let the DOM handle its state, which can be beneficial in certain scenarios, especially when you're working with existing non-React code or when you prefer a less declarative approach.
 
