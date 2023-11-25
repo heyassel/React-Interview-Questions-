@@ -30,6 +30,8 @@
 27. [What is React Fiber?](#what-is-react-fiber)
 28. [What is the main goal of React Fiber?](#what-is-the-main-goal-of-react-fiber)
 29. [What are controlled components?](#what-are-controlled-components)
+30. [What is the difference between createElement and cloneElement?](#what-is-the-difference-between-createElement-and-cloneElement)
+
 ---
 
 ## What is React?
@@ -959,3 +961,47 @@ Use Cases:
 Uncontrolled components are handy when you want a more straightforward interaction with the DOM, or when integrating React with non-React code.
 Uncontrolled components are a bit more hands-off; they let the DOM handle its state, which can be beneficial in certain scenarios, especially when you're working with existing non-React code or when you prefer a less declarative approach.
 
+### What is the difference between createElement and cloneElement?
+
+The createElement and cloneElement functions in React serve different purposes when it comes to creating and manipulating React elements.
+
+createElement:
+Purpose:
+
+createElement: Used to create a new React element.
+
+cloneElement:
+Purpose:
+
+cloneElement: Used to clone and optionally modify an existing React element.
+Syntax:
+
+cloneElement:
+
+```
+ React.cloneElement(element, [props], [...children])
+```
+
+* element: The React element to clone.
+* props: Optional properties to merge or override in the cloned element.
+* children: Optional new child elements.
+
+Use Cases:
+
+cloneElement is useful when you want to reuse an existing element but apply slight modifications, such as adding or overriding props.
+
+Key Differences:
+* Creation vs. Cloning:
+
+createElement is for creating new elements from scratch.
+cloneElement is for duplicating and potentially modifying existing elements.
+* Primary Use:
+
+createElement is typically used when you want to create elements dynamically.
+cloneElement is used when you want to reuse an existing element with some adjustments.
+* Applicability:
+
+createElement is more suitable for scenarios where you need to create elements on the fly.
+cloneElement is handy for cases where you have an existing element that needs to be reused with slight variations.
+
+> In summary, createElement is for creating new elements, while cloneElement is for duplicating and optionally modifying existing elements. They serve different purposes in the React element creation and manipulation process.
