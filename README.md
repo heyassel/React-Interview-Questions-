@@ -28,6 +28,8 @@
 25. [How do you memoize a component?](#how-do-you-memoize-a-component)
 26. [What is virtual DOM?](#what-is-virtual-dom)
 27. [What is React Fiber?](#what-is-react-fiber)
+28. [What is the main goal of React Fiber?](#what-is-the-main-goal-of-react-fiber)
+29. [What are controlled components?](#what-are-controlled-components)
 ---
 
 ## What is React?
@@ -886,5 +888,31 @@ Can you explain the difference between Shadow DOM and Virtual DOM?
 
 ### What is React Fiber?
 
+
+### What is the main goal of React Fiber?
+
+Need to read??
+
+### What are controlled components?
+
+Can you explain what controlled components are in React?
+Absolutely. In React, a controlled component is a form element, like an input field or textarea, whose value is tied to the component's state. The state becomes the single source of truth for the value of that form element.
+
+Key Characteristics:
+
+State as Source of Truth:
+
+The value of the form element is stored in the React state.
+Any changes in the value are reflected in the state.
+
+OnChange Handler:
+
+An onChange event handler captures user input.
+It updates the state with the new value whenever the user interacts with the form element.
+
+Immutable State:
+
+The state is updated using setState, ensuring immutability.
+This triggers a re-render with the updated value.
 
 
