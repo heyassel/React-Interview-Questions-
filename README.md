@@ -31,6 +31,7 @@
 28. [What is the main goal of React Fiber?](#what-is-the-main-goal-of-react-fiber)
 29. [What are controlled components?](#what-are-controlled-components)
 30. [What is the difference between createElement and cloneElement?](#what-is-the-difference-between-createElement-and-cloneElement)
+31. [What is Lifting State Up in React?](#what-is-lifting-state-up-in-react?)
 
 ---
 
@@ -1005,3 +1006,5 @@ createElement is more suitable for scenarios where you need to create elements o
 cloneElement is handy for cases where you have an existing element that needs to be reused with slight variations.
 
 > In summary, createElement is for creating new elements, while cloneElement is for duplicating and optionally modifying existing elements. They serve different purposes in the React element creation and manipulation process.
+
+### What is Lifting State Up in React?
